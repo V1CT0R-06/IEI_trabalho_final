@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Técnico - Felinos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Login Page -->
+    <div id="login-page" class="h-screen flex items-center justify-center bg-blue-50">
+        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username:</label>
+                    <input type="text" id="username" name="username" class="w-full border border-gray-300 rounded-lg p-2" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                    <input type="password" id="password" name="password" class="w-full border border-gray-300 rounded-lg p-2" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-600">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="main-page" class="hidden">
+        <header class="bg-blue-500 text-white p-4 text-center text-2xl font-bold">
+            Estudo Técnico - Felinos
+        </header>
+        <nav class="bg-gray-800 text-white p-4">
+            <ul class="flex justify-around text-sm">
+                <li><button class="tab-button p-2 bg-blue-600 rounded-lg" data-tab="introducao">Introdução</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="taxonomia">Taxonomia e Evolução</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="anatomia">Anatomia e Fisiologia</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="comportamento">Comportamento Felino</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="saude">Saúde e Bem-estar</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="ciencia">Gatos na Ciência</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="psicologia">Gatos e Psicologia Humana</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="sustentabilidade">Sustentabilidade</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="tecnologia">Tecnologia</button></li>
+                <li><button class="tab-button p-2 bg-gray-700 hover:bg-blue-600 rounded-lg" data-tab="futuro">Futuro</button></li>
+            </ul>
+        </nav>
+
+        <main class="p-4">
+            <section id="ciencia" class="tab-content hidden">
+                <h2 class="text-xl font-bold mb-4">Gatos na Ciência</h2>
+                <img src="https://source.unsplash.com/800x400/?cat,science" alt="Gatos na Ciência" class="w-full rounded-lg mb-4">
+                <canvas id="chartCiencia" class="w-1/2 mx-auto mb-4"></canvas>
+                <p>Gatos têm sido objeto de estudo em várias áreas da ciência, como comportamento, genética e saúde pública...</p>
+                <p>Estudos recentes destacam o impacto dos gatos como modelos para compreender doenças humanas e animais.</p>
+            </section>
+            <section id="psicologia" class="tab-content hidden">
+                <h2 class="text-xl font-bold mb-4">Gatos e Psicologia Humana</h2>
+                <img src="https://source.unsplash.com/800x400/?cat,therapy" alt="Psicologia Humana" class="w-full rounded-lg mb-4">
+                <canvas id="chartPsicologia" class="w-1/2 mx-auto mb-4"></canvas>
+                <p>A convivência com gatos tem benefícios psicológicos significativos, ajudando a reduzir o estresse e a ansiedade...</p>
+                <p>Além disso, os gatos têm sido utilizados em terapias assistidas para promover o bem-estar emocional.</p>
+            </section>
+            <section id="sustentabilidade" class="tab-content hidden">
+                <h2 class="text-xl font-bold mb-4">Sustentabilidade</h2>
+                <img src="https://source.unsplash.com/800x400/?cat,eco" alt="Sustentabilidade" class="w-full rounded-lg mb-4">
+                <canvas id="chartSustentabilidade" class="w-1/2 mx-auto mb-4"></canvas>
+                <p>O impacto ambiental dos gatos, especialmente em habitats sensíveis, é um tema importante...</p>
+                <p>Medidas de sustentabilidade incluem controle populacional e responsabilidade na posse de animais.</p>
+            </section>
+            <section id="tecnologia" class="tab-content hidden">
+                <h2 class="text-xl font-bold mb-4">Tecnologia</h2>
+                <img src="https://source.unsplash.com/800x400/?cat,technology" alt="Tecnologia" class="w-full rounded-lg mb-4">
+                <canvas id="chartTecnologia" class="w-1/2 mx-auto mb-4"></canvas>
+                <p>Dispositivos inteligentes, como rastreadores de saúde e câmeras, estão mudando a forma como interagimos com nossos gatos...</p>
+                <p>A tecnologia também permite o monitoramento remoto e a melhora do bem-estar animal.</p>
+            </section>
+            <section id="futuro" class="tab-content hidden">
+                <h2 class="text-xl font-bold mb-4">Futuro</h2>
+                <img src="https://source.unsplash.com/800x400/?cat,future" alt="Futuro" class="w-full rounded-lg mb-4">
+                <canvas id="chartFuturo" class="w-1/2 mx-auto mb-4"></canvas>
+                <p>Com os avanços em biotecnologia e inteligência artificial, o futuro dos gatos domésticos pode incluir inovações na saúde e na interação...</p>
+                <p>Espera-se que novas tecnologias melhorem ainda mais a qualidade de vida dos gatos e sua conexão com os humanos.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Login Functionality
+        const loginForm = document.getElementById('login-form');
+        const loginPage = document.getElementById('login-page');
+        const mainPage = document.getElementById('main-page');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'gatos' && password === 'gatos') {
+                loginPage.classList.add('hidden');
+                mainPage.classList.remove('hidden');
+            } else {
+                alert('Credenciais inválidas. Tente novamente.');
+            }
+        });
+
+        // Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('bg-blue-600'));
+                button.classList.add('bg-blue-600');
+                const targetTab = button.dataset.tab;
+                tabContents.forEach(content => {
+                    content.id === targetTab ? content.classList.remove('hidden') : content.classList.add('hidden');
+                });
+            });
+        });
+
+        // Chart Examples
+        const ctxCiencia = document.getElementById('chartCiencia').getContext('2d');
+        new Chart(ctxCiencia, {
+            type: 'line',
+            data: {
+                labels: ['Comportamento', 'Genética', 'Saúde'],
+                datasets: [{
+                    label: 'Áreas de Estudo (%)',
+                    data: [40, 30, 30],
+                    backgroundColor: '#4bc0c0',
+                }]
+            },
+        });
+
+        const ctxPsicologia = document.getElementById('chartPsicologia').getContext('2d');
+        new Chart(ctxPsicologia, {
+            type: 'bar',
+            data: {
+                labels: ['Redução de Estresse', 'Terapia Assistida', 'Conexão Emocional'],
+                datasets: [{
+                    label: 'Impacto (%)',
+                    data: [50, 30, 20],
+                    backgroundColor: '#ffcd56',
+                }]
+            },
+        });
+
+        const ctxSustentabilidade = document.getElementById('chartSustentabilidade').getContext('2d');
+        new Chart(ctxSustentabilidade, {
+            type: 'pie',
+            data: {
+                labels: ['Controle Populacional', 'Responsabilidade', 'Educação'],
+                datasets: [{
+                    data: [35, 40, 25],
+                    backgroundColor: ['#36a2eb', '#ff6384', '#4bc0c0'],
+                }]
+            },
+        });
+
+        const ctxTecnologia = document.getElementById('chartTecnologia').getContext('2d');
+        new Chart(ctxTecnologia, {
+            type: 'doughnut',
+            data: {
+                labels: ['Rastreadores', 'Câmeras', 'Bem-estar'],
+                datasets: [{
+                    data: [40, 30, 30],
+                    backgroundColor: ['#ff9f40', '#ffcd56', '#4bc0c0'],
+                }]
+            },
+        });
+
+        const ctxFuturo = document.getElementById('chartFuturo').getContext('2d');
+        new Chart(ctxFuturo, {
+            type: 'polarArea',
+            data: {
+                labels: ['Saúde', 'Tecnologia', 'Conexão'],
+                datasets: [{
+                    data: [50, 25, 25],
+                    backgroundColor: ['#36a2eb', '#ff6384', '#4bc0c0'],
+                }]
+            },
+        });
+    </script>
+</body>
+</html>
