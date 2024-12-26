@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Técnico - Felinos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --bg-color: #212529;
+            --text-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .nav-link {
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #2563eb;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: 300px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-500 to-green-400 text-white text-center p-6 shadow-lg">
+        <h1 class="text-4xl font-extrabold">Estudo Técnico - Felinos</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white">
+        <ul class="flex justify-center space-x-6 p-4 text-sm">
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="introducao">Introdução</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="taxonomia">Taxonomia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="anatomia">Anatomia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="comportamento">Comportamento</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="saude">Saúde</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="ciencia">Ciência</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="psicologia">Psicologia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="sustentabilidade">Sustentabilidade</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="tecnologia">Tecnologia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="futuro">Futuro</button></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="p-6 space-y-8">
+        <!-- Introdução Section -->
+        <section id="introducao" class="tab-content active">
+            <h2 class="text-2xl font-bold mb-4">Introdução</h2>
+            <img src="https://source.unsplash.com/800x400/?cat" alt="Gato" class="rounded-lg shadow-md mb-6">
+            <p class="text-lg mb-4">Os gatos, cientificamente conhecidos como Felis catus, são uma das espécies de animais domésticos mais difundidas...</p>
+            <h3 class="text-xl font-semibold mb-4">Gráfico populacional</h3>
+            <canvas id="chartIntroducao" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- Taxonomia Section -->
+        <section id="taxonomia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Taxonomia</h2>
+            <canvas id="chartTaxonomia" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Espécies</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Felinos Selvagens</td>
+                        <td>50+</td>
+                        <td>Incluem tigres, leões e leopardos</td>
+                    </tr>
+                    <tr>
+                        <td>Felinos Domésticos</td>
+                        <td>1</td>
+                        <td>Felis catus</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Anatomia Section -->
+        <section id="anatomia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Anatomia</h2>
+            <canvas id="chartAnatomia" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parte do Corpo</th>
+                        <th>Função</th>
+                        <th>Adaptabilidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Olhos</td>
+                        <td>Visão noturna</td>
+                        <td>Alta</td>
+                    </tr>
+                    <tr>
+                        <td>Patas</td>
+                        <td>Movimento silencioso</td>
+                        <td>Alta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Saúde Section -->
+        <section id="saude" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Saúde</h2>
+            <canvas id="chartSaude" class="rounded-lg shadow-md"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-6">
+        <p>Estudo Técnico - Felinos © 2024 | Criado para amantes dos felinos em todo o mundo.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Tab Functionality
+        document.querySelectorAll('.nav-link').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('bg-blue-500'));
+                document.getElementById(button.dataset.tab).classList.add('active');
+                button.classList.add('bg-blue-500');
+            });
+        });
+
+        // Charts Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            new Chart(document.getElementById('chartIntroducao'), {
+                type: 'bar',
+                data: {
+                    labels: ['Europa', 'Ásia', 'América', 'África'],
+                    datasets: [{
+                        label: 'População de gatos (milhões)',
+                        data: [50, 70, 40, 30],
+                        backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56', '#36A2EB']
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById('chartTaxonomia'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Felinos Selvagens', 'Felinos Domésticos'],
+                    datasets: [{ data: [40, 60], backgroundColor: ['#36A2EB', '#FF6384'] }]
+                }
+            });
+
+            new Chart(document.getElementById('chartAnatomia'), {
+                type: 'radar',
+                data: {
+                    labels: ['Olhos', 'Patas', 'Cauda', 'Orelhas'],
+                    datasets: [{
+                        data: [90, 85, 75, 80],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: '#36A2EB'
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById('chartSaude'), {
+                type: 'line',
+                data: {
+                    labels: ['Vacinação', 'Dieta', 'Exercício'],
+                    datasets: [{
+                        label: 'Cuidados (%)',
+                        data: [90, 70, 80],
+                        borderColor: '#FF6384',
+                        tension: 0.4
+                    }]
+                }
+            });
+        });
+    </script>
+</body>
+</html>

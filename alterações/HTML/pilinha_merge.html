@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Técnico - Felinos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #212529;
+            --text-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        main {
+            flex: 1;
+            padding: 1.5rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .nav-link {
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #2563eb;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: 300px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        #themeToggle {
+            cursor: pointer;
+            margin: 10px;
+            padding: 5px 15px;
+            border: 2px solid currentColor;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header class="bg-gradient-to-r from-blue-500 to-green-400 text-white text-center p-6 shadow-lg">
+        <h1 class="text-4xl font-extrabold">Estudo Técnico - Felinos</h1>
+        <button id="themeToggle">Toggle Dark Mode</button>
+    </header>
+
+    <nav class="bg-gray-800 text-white">
+        <ul class="flex justify-center space-x-6 p-4 text-sm">
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="introducao">Introdução</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="taxonomia">Taxonomia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="anatomia">Anatomia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="comportamento">Comportamento</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="saude">Saúde</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="ciencia">Ciência</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="psicologia">Psicologia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="sustentabilidade">Sustentabilidade</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="tecnologia">Tecnologia</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="futuro">Futuro</button></li>
+            <li><button class="nav-link px-3 py-2 rounded-md" data-tab="about-us">About Us</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Introdução -->
+        <section id="introducao" class="tab-content active">
+            <h2 class="text-2xl font-bold mb-4">Introdução</h2>
+            <p class="text-lg mb-4">Os gatos desempenham papéis culturais, científicos e emocionais em nossa sociedade. Com uma rica história evolutiva, esses animais se adaptaram a diferentes ambientes e conquistaram um espaço único na vida humana.</p>
+            <img src="https://source.unsplash.com/800x400/?cat" alt="Cats">
+            <canvas id="chartIntroducao" class="rounded-lg shadow-md"></canvas>
+            <div id="map" class="rounded-lg shadow-md"></div>
+        </section>
+
+        <!-- Taxonomia -->
+        <section id="taxonomia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Taxonomia</h2>
+            <p class="text-lg mb-4">A taxonomia dos felinos é vasta, abrangendo tanto espécies selvagens como domésticas. Felinos são divididos em categorias que refletem sua evolução e habitat.</p>
+            <img src="https://source.unsplash.com/800x400/?wild-cats" alt="Wild Cats">
+            <canvas id="chartTaxonomia" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Espécies</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Felinos Selvagens</td>
+                        <td>50+</td>
+                        <td>Incluem tigres, leões e leopardos</td>
+                    </tr>
+                    <tr>
+                        <td>Felinos Domésticos</td>
+                        <td>1</td>
+                        <td>Felis catus</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Anatomia -->
+        <section id="anatomia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Anatomia</h2>
+            <p class="text-lg mb-4">Os felinos possuem características anatômicas notáveis que os tornam predadores eficientes. Sua estrutura corporal é adaptada para a caça e sobrevivência.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-anatomy" alt="Cat Anatomy">
+            <canvas id="chartAnatomia" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parte do Corpo</th>
+                        <th>Função</th>
+                        <th>Adaptabilidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Olhos</td>
+                        <td>Visão noturna</td>
+                        <td>Alta</td>
+                    </tr>
+                    <tr>
+                        <td>Patas</td>
+                        <td>Movimento silencioso</td>
+                        <td>Alta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Comportamento -->
+        <section id="comportamento" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Comportamento</h2>
+            <p class="text-lg mb-4">Os gatos têm comportamentos únicos que os tornam fascinantes. Desde a maneira como eles interagem com os humanos até seus instintos de caça, cada traço revela algo especial sobre sua psicologia.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-behavior" alt="Cat Behavior">
+            <canvas id="chartComportamento" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Comportamento</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ronronar</td>
+                        <td>Indica conforto ou comunicação</td>
+                    </tr>
+                    <tr>
+                        <td>Arranhar</td>
+                        <td>Marca território e cuida das garras</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Saúde -->
+        <section id="saude" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Saúde</h2>
+            <p class="text-lg mb-4">Manter a saúde dos gatos envolve nutrição equilibrada, vacinação, e cuidados regulares. Prevenir doenças comuns aumenta a longevidade dos felinos.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-health" alt="Cat Health">
+            <canvas id="chartSaude" class="rounded-lg shadow-md"></canvas>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Importância</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Vacinação</td>
+                        <td>Previne doenças virais</td>
+                    </tr>
+                    <tr>
+                        <td>Dieta</td>
+                        <td>Garante energia e bem-estar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Ciência -->
+        <section id="ciencia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Ciência</h2>
+            <p class="text-lg mb-4">Pesquisas científicas exploram o comportamento, genética e biologia dos felinos, contribuindo para a conservação e avanços na saúde animal.</p>
+            <img src="https://source.unsplash.com/800x400/?science-cats" alt="Scientific Studies on Cats">
+            <canvas id="chartCiencia" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- Psicologia -->
+        <section id="psicologia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Psicologia</h2>
+            <p class="text-lg mb-4">A psicologia dos gatos é fascinante, revelando como eles expressam emoções, interagem com os humanos, e se adaptam ao ambiente.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-psychology" alt="Cat Psychology">
+            <canvas id="chartPsicologia" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- Sustentabilidade -->
+        <section id="sustentabilidade" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Sustentabilidade</h2>
+            <p class="text-lg mb-4">Promover práticas sustentáveis, como proteção de habitats naturais e controle populacional, ajuda a preservar o equilíbrio ecológico e os felinos selvagens.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-conservation" alt="Sustainable Practices for Cats">
+            <canvas id="chartSustentabilidade" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- Tecnologia -->
+        <section id="tecnologia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Tecnologia</h2>
+            <p class="text-lg mb-4">Tecnologias modernas, como rastreadores GPS e dispositivos inteligentes, ajudam a monitorar gatos, garantindo segurança e qualidade de vida.</p>
+            <img src="https://source.unsplash.com/800x400/?cat-technology" alt="Technology for Cats">
+            <canvas id="chartTecnologia" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- Futuro -->
+        <section id="futuro" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">Futuro</h2>
+            <p class="text-lg mb-4">O futuro dos felinos depende de práticas sustentáveis, pesquisa contínua, e o compromisso global com sua conservação e bem-estar.</p>
+            <img src="https://source.unsplash.com/800x400/?future-cats" alt="Future of Cats">
+            <canvas id="chartFuturo" class="rounded-lg shadow-md"></canvas>
+        </section>
+
+        <!-- About Us -->
+        <section id="about-us" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4">About Us</h2>
+            <p class="text-lg mb-4">We are a passionate team dedicated to sharing insights about felines. From wild cats to domestic companions, we aim to educate, inspire, and celebrate the beauty of these creatures.</p>
+            <img src="https://source.unsplash.com/800x400/?team-cats" alt="Team and Cats">
+        </section>
+    </main>
+
+    <footer>
+        <p>Estudo Técnico - Felinos © 2024 | Criado para amantes dos felinos em todo o mundo.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const initChart = (id, type, data) => {
+                new Chart(document.getElementById(id), { type, data });
+            };
+
+            // Initialize all charts
+            initChart('chartIntroducao', 'bar', { labels: ['Asia', 'Africa', 'Europe'], datasets: [{ label: 'População (milhões)', data: [50, 40, 30], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'] }] });
+            initChart('chartTaxonomia', 'doughnut', { labels: ['Wild Cats', 'Domestic Cats'], datasets: [{ data: [30, 70], backgroundColor: ['#36A2EB', '#FF6384'] }] });
+            initChart('chartAnatomia', 'radar', { labels: ['Visão', 'Audição', 'Velocidade'], datasets: [{ data: [80, 70, 90], backgroundColor: 'rgba(54, 162, 235, 0.2)', borderColor: '#36A2EB' }] });
+            initChart('chartComportamento', 'pie', { labels: ['Ronronar', 'Arranhar', 'Explorar'], datasets: [{ data: [50, 30, 20], backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56'] }] });
+            initChart('chartSaude', 'line', { labels: ['Vacinação', 'Dieta', 'Exercício'], datasets: [{ label: 'Saúde (%)', data: [80, 70, 90], borderColor: '#FF6384', tension: 0.4 }] });
+            initChart('chartCiencia', 'bar', { labels: ['Genética', 'Ecologia', 'Comportamento'], datasets: [{ label: 'Estudos Recentes', data: [20, 35, 45], backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56'] }] });
+            initChart('chartPsicologia', 'doughnut', { labels: ['Interação Humana', 'Socialização', 'Expressão'], datasets: [{ data: [60, 25, 15], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'] }] });
+            initChart('chartSustentabilidade', 'polarArea', { labels: ['Habitat', 'População', 'Conservação'], datasets: [{ data: [50, 30, 20], backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56'] }] });
+            initChart('chartTecnologia', 'bar', { labels: ['GPS', 'AI', 'Monitoramento'], datasets: [{ label: 'Tecnologia (%)', data: [40, 50, 70], backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56'] }] });
+            initChart('chartFuturo', 'line', { labels: ['2025', '2030', '2040'], datasets: [{ label: 'Progresso', data: [60, 80, 100], borderColor: '#36A2EB', tension: 0.4 }] });
+
+            // Initialize Map
+            const map = L.map('map').setView([20, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            L.marker([35.6895, 139.6917]).addTo(map).bindPopup('Tokyo, Japan');
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.nav-link').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Dark mode toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.dataset.theme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+        });
+    </script>
+</body>
+</html>
