@@ -127,6 +127,25 @@
             display: block;
         }
 
+        .section-image {
+            width: 600px;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            object-fit: cover;
+        }
+
+        #introImage {
+            display: block;
+            margin: 20px auto;
+            max-width: 35%;
+            height: auto;
+            border-radius: 15px;
+        }
+
         footer {
             margin-top: auto;
             background-color: #f1f1f1;
@@ -173,43 +192,52 @@
     </nav>
 
     <div class="content">
-        <h2>Bem-vindo ao Estudo Técnico sobre Felinos</h2>
-        <p>Welcome to the main sections of our technical study on felines. Here, you'll find detailed information about their taxonomy, anatomy, behavior, and much more.</p>
+        <h2>Selecione o conteudo que deseja ler no menu acima</h2>
+        <img id="introImage" src="images/ua.png" alt="Intro Image">
         <div id="taxonomia" class="hidden">
-            <h3>Taxonomia</h3>
+            <h2>Taxonomia</h2>
             <p>Taxonomy is the science of classifying organisms. In this section, we explore the classification of felines.</p>
+            <img src="images/taxonomia.jpg" alt="Taxonomia" class="section-image">
         </div>
         <div id="anatomia" class="hidden">
-            <h3>Anatomia</h3>
+            <h2>Anatomia</h2>
             <p>Anatomy focuses on the structure of feline bodies, detailing their unique physical characteristics.</p>
+            <img src="images/anatomia.jpg" alt="Anatomia" class="section-image">
         </div>
         <div id="comportamento" class="hidden">
-            <h3>Comportamento</h3>
+            <h2>Comportamento</h2>
             <p>Behavior studies explore how felines interact with their environment and each other.</p>
+            <img src="images/comportamento.jpg" alt="Comportamento" class="section-image">
         </div>
         <div id="saude" class="hidden">
-            <h3>Saúde</h3>
+            <h2>Saúde</h2>
             <p>Health-related topics include common feline diseases, their prevention, and care.</p>
+            <img src="images/saude.jpg" alt="Saúde" class="section-image">
         </div>
         <div id="ciencia" class="hidden">
-            <h3>Ciência</h3>
+            <h2>Ciência</h2>
             <p>Scientific advances in understanding felines are covered in this section.</p>
+            <img src="images/ciencia.jpg" alt="Ciência" class="section-image">
         </div>
         <div id="psicologia" class="hidden">
-            <h3>Psicologia</h3>
+            <h2>Psicologia</h2>
             <p>The psychology of felines is explored, focusing on their cognition and emotions.</p>
+            <img src="images/psicologia.jpg" alt="Psicologia" class="section-image">
         </div>
         <div id="sustentabilidade" class="hidden">
-            <h3>Sustentabilidade</h3>
+            <h2>Sustentabilidade</h2>
             <p>Sustainability and its impact on feline habitats are discussed in detail.</p>
+            <img src="images/sustentabilidade.jpg" alt="Sustentabilidade" class="section-image">
         </div>
         <div id="tecnologia" class="hidden">
-            <h3>Tecnologia</h3>
+            <h2>Tecnologia</h2>
             <p>Technology's role in studying and protecting felines is highlighted in this section.</p>
+            <img src="images/tecnologia.jpg" alt="Tecnologia" class="section-image">
         </div>
         <div id="futuro" class="hidden">
-            <h3>Futuro</h3>
+            <h2>Futuro</h2>
             <p>The future of felines in a changing world is explored here.</p>
+            <img src="images/futuro.jpg" alt="Futuro" class="section-image">
         </div>
     </div>
 
@@ -231,6 +259,8 @@
                 document.body.dataset.theme = savedTheme;
             }
 
+            const defaultText = document.querySelector('.content > h2');
+            const introImage = document.getElementById('introImage');
             document.querySelectorAll('.btn[data-tab]').forEach(button => {
                 button.addEventListener('click', () => {
                     document.querySelectorAll('.content > div').forEach(section => {
@@ -239,6 +269,12 @@
                     const target = document.getElementById(button.dataset.tab);
                     if (target) {
                         target.classList.remove('hidden');
+                    }
+                    if (defaultText) {
+                        defaultText.style.display = 'none';
+                    }
+                    if (introImage) {
+                        introImage.style.display = 'none';
                     }
                 });
             });
