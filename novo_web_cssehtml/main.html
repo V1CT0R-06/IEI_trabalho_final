@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudo Técnico - Felinos</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         body {
             transition: background-color 0.3s, color 0.3s;
@@ -146,6 +148,15 @@
             border-radius: 15px;
         }
 
+        #map {
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+
+        [data-theme="dark"] #map {
+            border-color: #555;
+        }
+
         footer {
             margin-top: auto;
             background-color: #f1f1f1;
@@ -193,7 +204,9 @@
 
     <div class="content">
         <h2>Selecione o conteudo que deseja ler no menu acima</h2>
+        <div id="map"></div>
         <img id="introImage" src="images/ua.png" alt="Intro Image">
+
         <div id="taxonomia" class="hidden">
             <h2>Taxonomia</h2>
             <p>A classificação taxonómica e a história evolutiva dos gatos ajudam-nos a entender como esses animais se tornaram uma das espécies domésticas mais bem-sucedidas do planeta.
@@ -355,6 +368,28 @@ A urbanização também trará novos desafios, mas os gatos, como sempre, encont
                     }
                 });
             });
+        });
+
+        // Leaflet Map
+        const map = L.map('map').setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Example countries with high cat populations
+        const countries = [
+            { name: "USA", coords: [37.0902, -95.7129] },
+            { name: "Brazil", coords: [-14.2350, -51.9253] },
+            { name: "Russia", coords: [61.5240, 105.3188] },
+            { name: "China", coords: [35.8617, 104.1954] },
+            { name: "Japan", coords: [36.2048, 138.2529] },
+        ];
+
+        countries.forEach(country => {
+            L.marker(country.coords).addTo(map)
+                .bindPopup(`<b>${country.name}</b><br>Elevada população de Felinos.`);
         });
     </script>
 </body>

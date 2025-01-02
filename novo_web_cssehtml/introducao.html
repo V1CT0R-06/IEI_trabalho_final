@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introdução ao Estudo de Felinos</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         body {
             transition: background-color 0.3s, color 0.3s;
@@ -117,13 +115,62 @@
             margin-right: auto;
         }
 
-        #map {
-            height: 500px;
-            border: 1px solid #ccc;
+        .image-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
         }
 
-        [data-theme="dark"] #map {
-            border-color: #555;
+        .image-button {
+            position: relative;
+            display: inline-block;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .image-button img {
+            width: 750px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .image-button:hover {
+            transform: scale(1.05);
+            border-color: #007bff;
+        }
+
+        .image-button::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .image-button:hover::before {
+            opacity: 1;
+        }
+
+        #UAImage {
+            display: block;
+            margin: 20px auto;
+            max-width: 25%;
+            height: auto;
+            border-radius: 15px;
         }
 
         footer {
@@ -166,8 +213,19 @@
     <div class="content">
         <h2>Bem-vindo ao Estudo Técnico sobre Felinos</h2>
         <p>Esta é a página de introdução ao nosso projeto sobre felinos. Aqui, exploramos as curiosidades e fatos sobre o mundo dos gatos, incluindo sua anatomia, comportamento, saúde, e muito mais.</p>
-        <p>Aqui está um mapa com os países com maior população dos nossos amigos felinos:</p>
-        <div id="map"></div>
+    </div>
+
+    <div class="image-buttons">
+        <a href="main.html" class="image-button" data-tooltip="Introdução e Conteúdo Principal">
+            <img src="images/alimentacao.jpg" alt="Main Content">
+        </a>
+        <a href="about.html" class="image-button" data-tooltip="Sobre o Projeto e Autores">
+            <img src="images/comportamento.jpg" alt="About">
+        </a>
+    </div>
+
+    <div class="image-UA">
+        <img id="UAImage" src="images/ua.png" alt="UA Image">
     </div>
 
     <footer>
@@ -175,7 +233,6 @@
     </footer>
 
     <script>
-        // Dark mode toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.dataset.theme === 'dark';
@@ -185,28 +242,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.body.dataset.theme = 'dark';
-        });
-
-        // Leaflet Map
-        const map = L.map('map').setView([20, 0], 2);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Example countries with high cat populations
-        const countries = [
-            { name: "USA", coords: [37.0902, -95.7129] },
-            { name: "Brazil", coords: [-14.2350, -51.9253] },
-            { name: "Russia", coords: [61.5240, 105.3188] },
-            { name: "China", coords: [35.8617, 104.1954] },
-            { name: "Japan", coords: [36.2048, 138.2529] },
-        ];
-
-        countries.forEach(country => {
-            L.marker(country.coords).addTo(map)
-                .bindPopup(`<b>${country.name}</b><br>Population of cats.`);
         });
     </script>
 </body>
