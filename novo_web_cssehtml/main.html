@@ -246,18 +246,22 @@
     </footer>
 
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.body.dataset.theme === 'dark';
-            document.body.dataset.theme = isDark ? 'light' : 'dark';
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        });
-
         document.addEventListener('DOMContentLoaded', () => {
+            // Set default theme to dark mode
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.body.dataset.theme = savedTheme;
+            } else {
+                document.body.dataset.theme = 'dark';
+                localStorage.setItem('theme', 'dark');
             }
+
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.body.dataset.theme === 'dark';
+                document.body.dataset.theme = isDark ? 'light' : 'dark';
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            });
 
             const defaultText = document.querySelector('.content > h2');
             const introImage = document.getElementById('introImage');

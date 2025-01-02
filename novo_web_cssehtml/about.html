@@ -138,7 +138,7 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <header>
         <h1 class="page-title">Sobre os Autores</h1>
         <button id="themeToggle">Toggle Dark Mode</button>
@@ -177,6 +177,9 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.body.dataset.theme = savedTheme;
+            } else {
+                // Ensure the default theme is dark
+                document.body.dataset.theme = 'dark';
             }
         });
     </script>

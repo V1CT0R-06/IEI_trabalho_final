@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introdução ao Estudo de Felinos</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         body {
             transition: background-color 0.3s, color 0.3s;
@@ -115,6 +117,15 @@
             margin-right: auto;
         }
 
+        #map {
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+
+        [data-theme="dark"] #map {
+            border-color: #555;
+        }
+
         footer {
             margin-top: auto;
             background-color: #f1f1f1;
@@ -138,7 +149,7 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <header>
         <h1 class="page-title">Estudo de Felinos - Introdução</h1>
         <button id="themeToggle">Toggle Dark Mode</button>
@@ -155,7 +166,8 @@
     <div class="content">
         <h2>Bem-vindo ao Estudo Técnico sobre Felinos</h2>
         <p>Esta é a página de introdução ao nosso projeto sobre felinos. Aqui, exploramos as curiosidades e fatos sobre o mundo dos gatos, incluindo sua anatomia, comportamento, saúde, e muito mais.</p>
-        <p>Aqui está um mapa com os paises com maior população dos nossos amigos felinos:</p>
+        <p>Aqui está um mapa com os países com maior população dos nossos amigos felinos:</p>
+        <div id="map"></div>
     </div>
 
     <footer>
@@ -163,6 +175,7 @@
     </footer>
 
     <script>
+        // Dark mode toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.dataset.theme === 'dark';
@@ -171,10 +184,29 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.dataset.theme = savedTheme;
-            }
+            document.body.dataset.theme = 'dark';
+        });
+
+        // Leaflet Map
+        const map = L.map('map').setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Example countries with high cat populations
+        const countries = [
+            { name: "USA", coords: [37.0902, -95.7129] },
+            { name: "Brazil", coords: [-14.2350, -51.9253] },
+            { name: "Russia", coords: [61.5240, 105.3188] },
+            { name: "China", coords: [35.8617, 104.1954] },
+            { name: "Japan", coords: [36.2048, 138.2529] },
+        ];
+
+        countries.forEach(country => {
+            L.marker(country.coords).addTo(map)
+                .bindPopup(`<b>${country.name}</b><br>Population of cats.`);
         });
     </script>
 </body>
