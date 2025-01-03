@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         body {
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.1s, color 0.1s;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -340,6 +340,9 @@ A urbanização também trará novos desafios, mas os gatos, como sempre, encont
     </footer>
 
     <script>
+
+
+
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.dataset.theme === 'dark';
@@ -347,11 +350,15 @@ A urbanização também trará novos desafios, mas os gatos, como sempre, encont
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
 
-                document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.body.dataset.theme = savedTheme;
+            } else {
+                // Ensure the default theme is dark
+                document.body.dataset.theme = 'dark';
             }
+        });
             
             const defaultText = document.querySelector('.content > h2');
             const introParagraph = document.getElementById('introParagraph');
@@ -380,7 +387,6 @@ A urbanização também trará novos desafios, mas os gatos, como sempre, encont
                     }
                 });
             });
-        });
 
 
         // Leaflet Map
