@@ -65,46 +65,6 @@
             background-color: #777;
         }
 
-        nav {
-            background-color: #f1f1f1;
-            padding: 10px;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        [data-theme="dark"] nav {
-            background-color: #444;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        nav ul li a:hover {
-            background-color: #007bff;
-        }
-
-        [data-theme="dark"] nav ul li a {
-            color: #bbb;
-        }
-
         .content {
             margin-top: 20px;
             padding: 30px;
@@ -129,6 +89,7 @@
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s, border-color 0.3s;
+            text-align: center;
         }
 
         .image-button img {
@@ -144,19 +105,14 @@
         }
 
         .image-button::before {
-            content: attr(data-tooltip);
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            background: url('images/Cat-Paw-Print-1.png') no-repeat center center;
+            background-size: contain;
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -165,10 +121,22 @@
             opacity: 1;
         }
 
+        .image-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        [data-theme="dark"] .image-title {
+            color: #ddd;
+        }
+
         #UAImage {
             display: block;
             margin: 20px auto;
-            max-width: 10%;
+            max-width: 8.5%;
             height: auto;
             border-radius: 15px;
         }
@@ -194,6 +162,7 @@
         footer a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
 <body data-theme="dark">
@@ -201,27 +170,24 @@
         <h1 class="page-title">Estudo de Felinos - Inicio</h1>
         <button id="themeToggle">Toggle Dark Mode</button>
     </header>
-
-    <nav>
-        <ul>
-            <li><a href="inicio.html">Início</a></li>
-            <li><a href="main.html">Estudo Técnico</a></li>
-            <li><a href="about.html">Sobre</a></li>
-        </ul>
-    </nav>
-
     <div class="content">
         <h2>Bem-vindo ao Estudo Técnico sobre Felinos</h2>
         <p>Esta é a página de introdução ao nosso projeto sobre felinos. Aqui, exploramos as curiosidades e fatos sobre o mundo dos gatos, incluindo sua anatomia, comportamento, saúde, e muito mais.</p>
     </div>
 
     <div class="image-buttons">
-        <a href="main.html" class="image-button" data-tooltip="Introdução e Estudo Técnico">
-            <img src="images/butao_conteudo.jpg" alt="Main Content">
-        </a>
-        <a href="about.html" class="image-button" data-tooltip="Sobre o Projeto e Autores">
-            <img src="images/butao_sobre.jpg" alt="About">
-        </a>
+        <div>
+            <div class="image-title">Introdução e Estudo Técnico</div>
+            <a href="main.html" class="image-button">
+                <img src="images/butao_conteudo.jpg" alt="Main Content">
+            </a>
+        </div>
+        <div>
+            <div class="image-title">Sobre o Projeto e Autores</div>
+            <a href="about.html" class="image-button">
+                <img src="images/butao_sobre.jpg" alt="About">
+            </a>
+        </div>
     </div>
 
     <div class="image-UA">
