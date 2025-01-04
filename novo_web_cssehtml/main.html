@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="grafico.js" defer></script>
     
 </head>
 <body>
@@ -95,10 +97,12 @@ dos cuidados regulares, a saúde mental dos gatos também é um campo emergente,
 frequente pode reduzir comportamentos destrutivos.
 As práticas veterinárias modernas trouxeram avanços significativos na saúde dos gatos. Por exemplo, as vacinas contra doenças como leucemia felina e panleucopenia têm contribuído para aumentar a expectativa de vida dos gatos domésticos. Além disso, debates sobre nutrição felina destacam a importância de dietas balanceadas e livres de conservantes artificiais.
 Programas de bem-estar que integram estímulos sensoriais, como sons naturais ou luzes reguláveis, são cada vez mais explorados como formas de enriquecer a vida dos gatos.</p>
-            <img src="images/saude.jpg" alt="Saúde" class="section-image">
+            <h2>Principais Problemas de Saúde em Gatos</h2>
+            <canvas id="catHealthChart" width="800" height="800"></canvas>
 <p>As visitas regulares ao veterinário são essenciais para prevenir e tratar doenças. Vacinas contra doenças como a raiva e a leucemia felina são obrigatórias em muitos países.</p>
 Os gatos precisam de uma dieta rica em proteínas de origem animal e aminoácidos essenciais, como a taurina. Deficiências nutricionais podem levar a problemas graves de saúde, como cardiomiopatia dilatada e cegueira.
 A introdução de dietas especializadas para gatos com condições como diabetes ou obesidade reflete os avanços na nutrição veterinária, promovendo vidas mais longas e saudáveis.</p>
+            <img src="images/saude.jpg" alt="Saúde" class="section-image">
         </div>
         <div id="ciencia" class="hidden">
             <h2>Ciência</h2>
