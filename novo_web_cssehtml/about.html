@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Estudo Técnico</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Adicionando o Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-F7kNk9C+xBY6B1sh5b1HYXHiZzzQfugQ3b+xj7M8K2KrQor7RZn2aZ57QuxLec8w" crossorigin=""/>
+
+    <style>
+        /* Estilo para o mapa */
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body data-theme="dark">
     <header>
@@ -28,23 +40,44 @@
         <h2>Sobre os Autores</h2>
         <p>Eu sou o autor deste projeto, um entusiasta de felinos e um apaixonado por explorar as maravilhas da natureza e da ciência.</p>
 
-        <div class="github-link" style="margin-top: 20px; display: flex; align-items: center;">
+        <div id="map"></div>
+
+        <div class="github-link" style="margin-top: 20px; display: flex; align-items: center; justify-content: center;">
             <a href="https://github.com/orgs/detiuaveiro/teams/infor2024-ap-g27/repositories" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
                 <img src="images/github.png" alt="GitHub" style="width: 80px; height: 80px; margin-right: 20px;">
                 <span style="font-size: 30px; color: #9a9a9a;">O nosso repositório do GitHub</span>
             </a>
         </div>
-    </div>
 
-    <div class="image-UA">
-        <a href="https://ua.pt" target="_blank">
-            <img id="UAImage" src="images/ua.png" alt="UA Image">
-        </a>
+        <div class="image-UA" style="margin-top: 20px; text-align: center;">
+            <a href="https://ua.pt" target="_blank">
+                <img id="UAImage" src="images/ua.png" alt="UA Image">
+            </a>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2024 Felinos Estudo. <a href="about.html">Sobre o projeto</a>.</p>
     </footer>
+
+    <!-- Adicionando o Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-qjzI1zUTj0HS1I5x9V5c8UNOTN9+9ZnjKrbMw5s2R9TPdKf/eOGRHNtY0XBnoS9g" crossorigin=""></script>
+
+    <script>
+        // Inicializando o mapa
+        const map = L.map('map').setView([40.63187, -8.65729], 15); // Coordenadas da Universidade de Aveiro
+
+        // Adicionando camada de tiles ao mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Adicionando um marcador para a Universidade de Aveiro
+        L.marker([40.63187, -8.65729]).addTo(map)
+            .bindPopup('<b>Universidade de Aveiro</b><br>Aveiro, Portugal.')
+            .openPopup();
+    </script>
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
