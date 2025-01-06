@@ -6,10 +6,10 @@ const ctx = canvas.getContext('2d');
 const dietaGatosChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Proteínas', 'Gorduras', 'Carboidratos', 'Vitaminas', 'Minerais'],
+        labels: ['Ossos carnudos', 'Carne Magra', 'Vísceras', 'Frutas', 'Vegetais'],
         datasets: [{
             label: 'Composição (%)',
-            data: [60, 20, 10, 5, 5],
+            data: [50, 30, 10, 5, 5],
             backgroundColor: [
                 'rgba(75, 192, 192, 0.6)',
                 'rgba(255, 159, 64, 0.6)',
