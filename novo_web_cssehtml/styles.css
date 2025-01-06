@@ -1137,6 +1137,7 @@ body {
             align-items: left;
             list-style: none;
             padding: 0;
+            margin: 0;
             margin: 0;    
         }
 
@@ -1145,7 +1146,7 @@ body {
             border: none;
             color: #007bff;
             padding: 5px 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
