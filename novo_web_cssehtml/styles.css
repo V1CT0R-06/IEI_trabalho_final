@@ -1237,6 +1237,8 @@ body {
         }
 
 
+/* Responsive Enhancements */
+
 /* Viewport Settings for Mobile */
 @media screen and (max-width: 768px) {
     header h1 {
