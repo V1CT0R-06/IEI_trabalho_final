@@ -1270,51 +1270,28 @@ body {
         }
         
 
-/* Responsive Design Enhancements */
-@media (max-width: 1200px) {
-    .content {
-        padding: 20px;
-        font-size: 1.2rem;
-    }
-    .image-button img {
-        width: 100%;
-        height: auto;
-    }
+/* Ensure the top menu is responsive */
+.nav-scroller {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.nav ul {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    justify-content: space-around; /* Distribute items evenly */
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    flex: 1 1 auto; /* Allow items to grow and shrink */
+    text-align: center;
 }
 
 @media (max-width: 768px) {
-    .content {
-        padding: 10px;
-        font-size: 1rem;
-    }
-    nav ul {
+    .nav ul {
         flex-direction: column;
         gap: 10px;
     }
-    .section-image {
-        width: 100%;
-        height: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-title {
-        font-size: 1.8rem;
-    }
-    header, footer {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-}
-
-img, video {
-    max-width: 100%;
-    height: auto;
-}
-
-canvas {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
