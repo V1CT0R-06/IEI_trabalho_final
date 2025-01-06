@@ -1266,3 +1266,14 @@ body {
             height: auto;
         }
         
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust the height as needed */
+        }
+        .center-container button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
