@@ -36,8 +36,8 @@ const config = {
     type: 'pie',
     data: data,
     options: {
-        responsive: false,
-        maintainAspectRatio: false, // Permitir ajuste de proporção
+        responsive: true,
+        maintainAspectRatio: true, // Permitir ajuste de proporção
         plugins: {
             legend: {
                 position: 'bottom',
