@@ -608,8 +608,9 @@ nav ul {
             }
     
             .nav-scroller {
+                padding: 10px; /* Reduced padding */
+                font-size: 0.9rem; /* Reduced font size */
                 background-color: #f1f1f1;
-                padding: 15px;
                 border-bottom: 1px solid #ccc;
             }
     
@@ -620,21 +621,16 @@ nav ul {
             .nav {
                 display: flex;
                 justify-content: center;
-                align-items: left;
+                align-items: center;
                 list-style: none;
                 padding: 0;
-                margin: 0;    
+                margin: 0;
             }
     
             .btn {
-                background: transparent;
-                border: none;
-                color: #007bff;
-                padding: 5px 20px;
-                font-size: 1.2rem;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background-color 0.3s;
+                padding: 5px 10px; /* Smaller padding */
+                font-size: 1rem; /* Smaller button text */
+                border-radius: 3px;
             }
     
             .btn:hover {
@@ -1149,7 +1145,7 @@ body {
             border: none;
             color: #007bff;
             padding: 5px 20px;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
