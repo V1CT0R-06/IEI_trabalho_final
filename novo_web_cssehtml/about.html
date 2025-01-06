@@ -5,18 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Estudo Técnico</title>
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Adicionando o Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-F7kNk9C+xBY6B1sh5b1HYXHiZzzQfugQ3b+xj7M8K2KrQor7RZn2aZ57QuxLec8w" crossorigin=""/>
-
-    <style>
-        /* Estilo para o mapa */
-        #map {
-            height: 400px;
-            width: 100%;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body data-theme="dark">
     <header>
@@ -60,25 +48,9 @@
         <p>&copy; 2024 Felinos Estudo. <a href="about.html">Sobre o projeto</a>.</p>
     </footer>
 
-    <!-- Adicionando o Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-qjzI1zUTj0HS1I5x9V5c8UNOTN9+9ZnjKrbMw5s2R9TPdKf/eOGRHNtY0XBnoS9g" crossorigin=""></script>
-
-    <script>
-        // Inicializando o mapa
-        const map = L.map('map').setView([40.63187, -8.65729], 15); // Coordenadas da Universidade de Aveiro
-
-        // Adicionando camada de tiles ao mapa
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        // Adicionando um marcador para a Universidade de Aveiro
-        L.marker([40.63187, -8.65729]).addTo(map)
-            .bindPopup('<b>Universidade de Aveiro</b><br>Aveiro, Portugal.')
-            .openPopup();
-    </script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    
     <script>
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
@@ -93,6 +65,23 @@
                 document.body.dataset.theme = savedTheme;
             } else {
                 document.body.dataset.theme = 'dark';
+            }
+
+            // Inicialização do mapa
+            const mapDiv = document.getElementById('map');
+            if (typeof L !== 'undefined') {
+                const map = L.map(mapDiv).setView([40.633, -8.659], 13); // Coordenadas de Aveiro, Portugal
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19
+                }).addTo(map);
+
+                // Marcador de exemplo
+                L.marker([40.633344054307976, -8.659611320246015]).addTo(map)
+                    .bindPopup('DETI: Departamento de Eletrónica, Telecomunicações e Informática')
+                    .openPopup();
+            } else {
+                console.error("Leaflet library is not loaded.");
             }
         });
     </script>
