@@ -521,7 +521,7 @@ nav ul {
             #UAImage {
                 display: block;
                 margin: 20px auto;
-                max-width: 8.5%;
+                max-width: 20%;
                 height: auto;
                 border-radius: 15px;
             }
@@ -1035,7 +1035,7 @@ body {
         #UAImage {
             display: block;
             margin: 20px auto;
-            max-width: 8.5%;
+            max-width: 20%;
             height: auto;
             border-radius: 15px;
         }
